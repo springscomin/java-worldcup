@@ -2,6 +2,7 @@ package worldcup.controller;
 
 import worldcup.inputview.MainInputView;
 import worldcup.outputview.MainOutputView;
+import worldcup.vo.ControllerName;
 import worldcup.vo.command.MainCommand;
 
 public class MainController extends AbstractController {
@@ -9,5 +10,8 @@ public class MainController extends AbstractController {
     void doProcess() {
         MainOutputView.printFeatures();
         MainCommand command = MainInputView.getCommand();
+        if (command == MainCommand.MATCH_RESULT) {
+            ControllerHolder.get(ControllerName.ALL_MATCH_RESULT).process();
+        }
     }
 }

@@ -13,6 +13,10 @@ public class Score {
         this.nationScore = nationScore;
     }
 
+    public String getNationName() {
+        return nation.getName();
+    }
+
     @Override
     public String toString() {
         return "Score{" +
@@ -36,5 +40,9 @@ public class Score {
     @Override
     public int hashCode() {
         return Objects.hash(nation, nationScore);
+    }
+
+    public int getScore() {
+        return nationScore;
     }
 }

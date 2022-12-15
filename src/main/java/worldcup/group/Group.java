@@ -2,11 +2,20 @@ package worldcup.group;
 
 import java.util.Objects;
 
-public class Group {
+public class Group implements Comparable<Group> {
     private final String name;
 
     public Group(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public int compareTo(Group o) {
+        return name.compareTo(o.getName());
     }
 
     @Override
