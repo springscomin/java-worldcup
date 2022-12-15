@@ -10,6 +10,7 @@ public class ControllerHolder {
 
     static {
         controllers.put(ControllerName.SETUP, new SetupController());
+        controllers.put(ControllerName.MAIN, new MainController());
     }
     public static Controller get(ControllerName controllerName) {
         return controllers.get(controllerName);
