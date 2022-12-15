@@ -7,4 +7,8 @@ public class MatchResultInputView extends AbstractInputView {
     public static String getGroupName() {
         return String.format(GROUP_NAME_FORMAT, readInput());
     }
+
+    public static String getNationName() {
+        return readInput();
+    }
 }

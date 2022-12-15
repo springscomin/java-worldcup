@@ -4,7 +4,7 @@ import worldcup.group.Group;
 import worldcup.nation.Nation;
 import worldcup.vo.GameResult;
 import worldcup.vo.Score;
-import worldcup.vo.ScoreByNation;
+import worldcup.dto.ScoreByNation;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -32,20 +32,20 @@ public class MatchRepository {
         return new ArrayList<>(nations);
     }
 
-    public static ScoreByNation findScoreOfNationByGroup(Nation nation, Group group) {
+    public static ScoreByNation findScoreByNation(Nation nation) {
         ScoreByNation scoreByNation = new ScoreByNation(nation);
-        List<MatchResult> matchResults = findAllByNationAndGroup(nation, group);
+        List<MatchResult> matchResults = findAllByNation(nation);
         for (MatchResult matchResult : matchResults) {
             countGameResult(nation, scoreByNation, matchResult);
         }
-        scoreByNation.addGoalDifference(countGoalDifference(nation, group));
-        scoreByNation.addPoints(countPoints(nation, group));
-        scoreByNation.addGoalCount(countGoal(nation, group));
+        scoreByNation.addGoalDifference(countGoalDifference(nation));
+        scoreByNation.addPoints(countPoints(nation));
+        scoreByNation.addGoalCount(countGoal(nation));
         return scoreByNation;
     }
 
-    private static int countGoal(Nation nation, Group group) {
-        List<MatchResult> matchResults = findAllByNationAndGroup(nation, group);
+    private static int countGoal(Nation nation) {
+        List<MatchResult> matchResults = findAllByNation(nation);
         int totalGoalCount = 0;
         for (MatchResult matchResult : matchResults) {
             totalGoalCount += matchResult.goalCount(nation);
@@ -53,8 +53,8 @@ public class MatchRepository {
         return totalGoalCount;
     }
 
-    private static int countPoints(Nation nation, Group group) {
-        List<MatchResult> matchResults = findAllByNationAndGroup(nation, group);
+    private static int countPoints(Nation nation) {
+        List<MatchResult> matchResults = findAllByNation(nation);
         int totalPoint = 0;
         for (MatchResult matchResult : matchResults) {
             totalPoint = getPoint(nation, totalPoint, matchResult);
@@ -73,8 +73,8 @@ public class MatchRepository {
         return point;
     }
 
-    private static int countGoalDifference(Nation nation, Group group) {
-        List<MatchResult> matchResults = findAllByNationAndGroup(nation, group);
+    private static int countGoalDifference(Nation nation) {
+        List<MatchResult> matchResults = findAllByNation(nation);
 
         int goalDifference = 0;
         for (MatchResult matchResult : matchResults) {
@@ -95,10 +95,17 @@ public class MatchRepository {
         }
     }
 
-    private static List<MatchResult> findAllByNationAndGroup(Nation nation, Group group) {
-        List<MatchResult> matchResultsByGroup = findAllByGroup(group);
-        return matchResultsByGroup
+    public static List<MatchResult> findAllByNation(Nation nation) {
+        return matchResults
                 .stream().filter(matchResult -> matchResult.hasNation(nation))
                 .collect(Collectors.toList());
+    }
+
+    public static Group findGroupByNation(Nation nation) {
+        return matchResults.stream()
+                .filter(matchResult -> matchResult.hasNation(nation))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new)
+                .getGroup();
     }
 }

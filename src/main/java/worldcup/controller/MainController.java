@@ -10,11 +10,22 @@ public class MainController extends AbstractController {
     void doProcess() {
         MainOutputView.printFeatures();
         MainCommand command = MainInputView.getCommand();
-        if (command == MainCommand.MATCH_RESULT) {
-            ControllerHolder.get(ControllerName.ALL_MATCH_RESULT).process();
+        doFindingAllMatchResultProcess(command);
+        doFindingMatchResultByGroupProcess(command);
+        if (command == MainCommand.NATION_RESULT) {
+            ControllerHolder.get(ControllerName.NATION_MATCH_RESULT).process();
         }
+    }
+
+    private static void doFindingMatchResultByGroupProcess(MainCommand command) {
         if (command == MainCommand.GROUP_RESULT) {
             ControllerHolder.get(ControllerName.GROUP_MATCH_RESULT).process();
+        }
+    }
+
+    private static void doFindingAllMatchResultProcess(MainCommand command) {
+        if (command == MainCommand.MATCH_RESULT) {
+            ControllerHolder.get(ControllerName.ALL_MATCH_RESULT).process();
         }
     }
 }

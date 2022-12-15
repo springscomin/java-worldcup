@@ -73,6 +73,10 @@ public class MatchResult {
         );
     }
 
+    public Group getGroup() {
+        return group;
+    }
+
     public boolean hasNation(Nation nation) {
         return scoreA.isNation(nation) || scoreB.isNation(nation);
     }

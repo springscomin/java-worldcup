@@ -1,4 +1,4 @@
-package worldcup.vo;
+package worldcup.dto;
 
 import worldcup.nation.Nation;
 
@@ -79,5 +79,22 @@ public class ScoreByNation {
 
     public int getGoalCount() {
         return goalCount;
+    }
+
+    @Override
+    public String toString() {
+        return "ScoreByNation{" +
+                "nation=" + nation +
+                ", winningCount=" + winningCount +
+                ", lostCount=" + lostCount +
+                ", tieCount=" + tieCount +
+                ", point=" + point +
+                ", goalDifference=" + goalDifference +
+                ", goalCount=" + goalCount +
+                '}';
+    }
+
+    public boolean isNation(Nation nation) {
+        return this.nation.equals(nation);
     }
 }

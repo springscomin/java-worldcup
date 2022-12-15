@@ -36,4 +36,8 @@ public class Nation {
     public int hashCode() {
         return Objects.hash(name);
     }
+
+    public boolean isName(String nationName) {
+        return name.equals(nationName);
+    }
 }

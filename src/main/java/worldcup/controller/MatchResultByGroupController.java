@@ -5,7 +5,7 @@ import worldcup.group.GroupRepository;
 import worldcup.inputview.MatchResultInputView;
 import worldcup.outputview.MatchResultOutputView;
 import worldcup.service.MatchService;
-import worldcup.vo.ScoreByNation;
+import worldcup.dto.ScoreByNation;
 
 import java.util.List;
 
