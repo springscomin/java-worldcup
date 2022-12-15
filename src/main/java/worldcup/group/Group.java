@@ -41,4 +41,8 @@ public class Group implements Comparable<Group> {
     public int hashCode() {
         return Objects.hash(name);
     }
+
+    public boolean isName(String groupName) {
+        return name.equals(groupName);
+    }
 }

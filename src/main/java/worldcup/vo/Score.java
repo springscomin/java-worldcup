@@ -4,7 +4,7 @@ import worldcup.nation.Nation;
 
 import java.util.Objects;
 
-public class Score {
+public class Score implements Comparable<Score> {
     private final Nation nation;
     private final Integer nationScore;
 
@@ -13,8 +13,20 @@ public class Score {
         this.nationScore = nationScore;
     }
 
+    public Nation getNation() {
+        return nation;
+    }
+
     public String getNationName() {
         return nation.getName();
+    }
+
+    public int getScore() {
+        return nationScore;
+    }
+
+    public boolean isNation(Nation nation) {
+        return this.nation.equals(nation);
     }
 
     @Override
@@ -42,7 +54,16 @@ public class Score {
         return Objects.hash(nation, nationScore);
     }
 
-    public int getScore() {
-        return nationScore;
+    @Override
+    public int compareTo(Score o) {
+        return nationScore.compareTo(o.nationScore);
+    }
+
+    public boolean higherThan(Score competitor) {
+        return this.compareTo(competitor) > 0;
+    }
+
+    public boolean lowerThan(Score competitor) {
+        return this.compareTo(competitor) < 0;
     }
 }

@@ -13,5 +13,8 @@ public class MainController extends AbstractController {
         if (command == MainCommand.MATCH_RESULT) {
             ControllerHolder.get(ControllerName.ALL_MATCH_RESULT).process();
         }
+        if (command == MainCommand.GROUP_RESULT) {
+            ControllerHolder.get(ControllerName.GROUP_MATCH_RESULT).process();
+        }
     }
 }

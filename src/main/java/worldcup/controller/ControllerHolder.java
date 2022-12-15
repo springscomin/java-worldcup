@@ -12,6 +12,7 @@ public class ControllerHolder {
         controllers.put(ControllerName.SETUP, new SetupController());
         controllers.put(ControllerName.MAIN, new MainController());
         controllers.put(ControllerName.ALL_MATCH_RESULT, new AllMatchResultController());
+        controllers.put(ControllerName.GROUP_MATCH_RESULT, new MatchResultByGroupController());
     }
     public static Controller get(ControllerName controllerName) {
         return controllers.get(controllerName);
