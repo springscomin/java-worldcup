@@ -7,6 +7,7 @@ import worldcup.dto.ScoreByNation;
 import worldcup.nation.Nation;
 
 import java.util.List;
+import java.util.Map;
 
 public class MatchResultOutputView {
 
@@ -19,6 +20,8 @@ public class MatchResultOutputView {
     public static final int WINNING_CUTLINE = 2;
     public static final String GOING_NEXT_SUCCEED_FORMAT = "%s %d로 16강 진출에 성공했습니다.%n";
     public static final String GOING_NEXT_FAILED_FORMAT = "%s %d로 16강 진출에 실패했습니다.%n";
+    public static final String FIRST_WINNER_FORMAT = "1위 %s%n";
+    public static final String SECOND_WINNDER_FORMAT = "2위 %s%n";
 
     public static void printAllMatchResultByGroup(Group group, List<MatchResult> matchResults) {
         System.out.println();
@@ -94,5 +97,18 @@ public class MatchResultOutputView {
                 matchResult.getNationBName(),
                 matchResult.getScoreA(),
                 matchResult.getScoreB());
+    }
+
+    public static void printAllWinnersByGroup(Map<String, List<String>> winners) {
+        for (Map.Entry<String, List<String>> groupNameAndWinners : winners.entrySet()) {
+            System.out.println();
+            System.out.println(groupNameAndWinners.getKey());
+            String firstNation = groupNameAndWinners.getValue().get(0);
+            String secondNation = groupNameAndWinners.getValue().get(1);
+
+            System.out.printf(FIRST_WINNER_FORMAT, firstNation);
+            System.out.printf(SECOND_WINNDER_FORMAT, secondNation);
+        }
+        System.out.println(CommonConstant.LINE_SEPARATOR.getText());
     }
 }

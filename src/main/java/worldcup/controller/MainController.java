@@ -12,6 +12,13 @@ public class MainController extends AbstractController {
         MainCommand command = MainInputView.getCommand();
         doFindingAllMatchResultProcess(command);
         doFindingMatchResultByGroupProcess(command);
+        doFindMatchResultByNationProcess(command);
+        if (command == MainCommand.WINNER_RESULT) {
+            ControllerHolder.get(ControllerName.WINNER_RESULT).process();
+        }
+    }
+
+    private static void doFindMatchResultByNationProcess(MainCommand command) {
         if (command == MainCommand.NATION_RESULT) {
             ControllerHolder.get(ControllerName.NATION_MATCH_RESULT).process();
         }
