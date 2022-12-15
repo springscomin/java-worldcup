@@ -18,8 +18,8 @@ public class MatchResultOutputView {
     public static final String ASKING_NATION_NAME = "출력할 국가를 입력하세요 (월드컵 출전 국가)";
     public static final String MATCH_RESULT_BY_GROUP_RANK_FORMAT = "%d위 %s, ";
     public static final int WINNING_CUTLINE = 2;
-    public static final String GOING_NEXT_SUCCEED_FORMAT = "%s %d로 16강 진출에 성공했습니다.%n";
-    public static final String GOING_NEXT_FAILED_FORMAT = "%s %d로 16강 진출에 실패했습니다.%n";
+    public static final String GOING_NEXT_SUCCEED_FORMAT = "%s %d위로 16강 진출에 성공했습니다.%n";
+    public static final String GOING_NEXT_FAILED_FORMAT = "%s %d위로 16강 진출에 실패했습니다.%n";
     public static final String FIRST_WINNER_FORMAT = "1위 %s%n";
     public static final String SECOND_WINNDER_FORMAT = "2위 %s%n";
 

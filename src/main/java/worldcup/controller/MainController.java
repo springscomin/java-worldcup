@@ -8,11 +8,18 @@ import worldcup.vo.command.MainCommand;
 public class MainController extends AbstractController {
     @Override
     void doProcess() {
-        MainOutputView.printFeatures();
-        MainCommand command = MainInputView.getCommand();
-        doFindingAllMatchResultProcess(command);
-        doFindingMatchResultByGroupProcess(command);
-        doFindMatchResultByNationProcess(command);
+        MainCommand command;
+        do {
+            MainOutputView.printFeatures();
+            command = MainInputView.getCommand();
+            doFindingAllMatchResultProcess(command);
+            doFindingMatchResultByGroupProcess(command);
+            doFindMatchResultByNationProcess(command);
+            doFindAllWinndersProcess(command);
+        } while (command != MainCommand.QUIT);
+    }
+
+    private static void doFindAllWinndersProcess(MainCommand command) {
         if (command == MainCommand.WINNER_RESULT) {
             ControllerHolder.get(ControllerName.WINNER_RESULT).process();
         }
