@@ -44,7 +44,6 @@ public class Match {
             throw new IllegalArgumentException(ErrorMessage.INVALID_TEAM_NAME_FOR_MATCH);
         }
     }
-    // TODO 기능: 특정 팀의 승점/골득실/득점 확인
 
     @Override
     public String toString() {
