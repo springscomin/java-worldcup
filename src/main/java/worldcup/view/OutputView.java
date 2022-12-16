@@ -88,4 +88,18 @@ public class OutputView {
         builder.append(" 득점 : ").append(teamResult.getScoreSummary().getTotalGoals());
         return builder.toString();
     }
+
+    public void printAdvancedTeams(Map<String, List<String>> advancedTeamsByGroup) {
+        advancedTeamsByGroup.keySet()
+                .stream()
+                .forEach(groupName -> printAdvancedTeamsByGroup(groupName, advancedTeamsByGroup.get(groupName)));
+    }
+
+    private void printAdvancedTeamsByGroup(String groupName, List<String> teamNames) {
+        System.out.println(groupName);
+        IntStream.range(1, 3)
+                .mapToObj(rank -> rank + "위 " + teamNames.get(rank - 1))
+                .forEach(System.out::println);
+        System.out.println();
+    }
 }

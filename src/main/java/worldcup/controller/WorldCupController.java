@@ -55,6 +55,7 @@ public class WorldCupController {
     }
 
     private void showAdvancedTeams() {
-        System.out.println(worldCupService.getAdvancedTeamsByGroup());
+        Map<String, List<String>> advancedTeamsByGroup = worldCupService.getAdvancedTeamsByGroup();
+        outputView.printAdvancedTeams(advancedTeamsByGroup);
     }
 }
