@@ -48,7 +48,7 @@ public class WorldCupController {
     }
 
     private void showTeamMatchResults() {
-
+        String teamName = inputView.inputTeamName();
     }
 
     private void showAdvancedTeams() {

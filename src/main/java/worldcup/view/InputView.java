@@ -6,6 +6,7 @@ import worldcup.controller.MenuCommand;
 public class InputView {
     public static final String INPUT_MENU_COMMAND = "출력할 내용을 입력하세요. (1 ~ 5)";
     public static final String INPUT_GROUP_NAME = "출력할 조를 입력하세요 (A ~ H)";
+    public static final String INPUT_TEAM_NAME = "출력할 국가를 입력하세요 (월드컵 출전 국가)";
 
     public MenuCommand inputMenuCommand() {
         System.out.println();
@@ -16,6 +17,12 @@ public class InputView {
     public String inputGroupName() {
         System.out.println();
         System.out.println(INPUT_GROUP_NAME);
+        return Console.readLine();
+    }
+
+    public String inputTeamName() {
+        System.out.println();
+        System.out.println(INPUT_TEAM_NAME);
         return Console.readLine();
     }
 }
