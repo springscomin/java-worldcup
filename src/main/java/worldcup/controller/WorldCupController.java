@@ -49,6 +49,9 @@ public class WorldCupController {
 
     private void showTeamMatchResults() {
         String teamName = inputView.inputTeamName();
+        TeamResult teamResult = worldCupService.getTeamResultByName(teamName);
+        List<Match> matches = worldCupService.getTeamMatchesByName(teamName);
+        outputView.printTeamMatchResults(teamResult, matches);
     }
 
     private void showAdvancedTeams() {

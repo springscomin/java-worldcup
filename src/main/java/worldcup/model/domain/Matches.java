@@ -36,4 +36,12 @@ public class Matches {
             throw new IllegalArgumentException(ErrorMessage.GROUP_MATCHES_NOT_FOUND);
         }
     }
+
+    public List<Match> findMatchesByTeamName(String teamName) {
+        List<Match> foundMatches = matches.stream()
+                .filter(match -> match.isPlayedBy(teamName))
+                .collect(Collectors.toList());
+        validateFoundMatches(foundMatches);
+        return foundMatches;
+    }
 }

@@ -33,14 +33,18 @@ public class WorldCupService {
         List<Match> matchesByGroup = matches.findMatchesByGroup(groupName);
         List<String> teamNames = findTeamNames(matchesByGroup);
         return teamNames.stream()
-                .map(name -> new Team(name, findTeamMatches(name, matchesByGroup)))
+                .map(name -> new Team(name, matches.findMatchesByTeamName(name)))
                 .collect(Collectors.toList());
     }
 
-    private List<Match> findTeamMatches(String teamNames, List<Match> matchesByGroup) {
-        return matchesByGroup.stream()
-                .filter(match -> match.isPlayedBy(teamNames))
-                .collect(Collectors.toList());
+    public TeamResult getTeamResultByName(String name) {
+        List<Match> teamMatches = matches.findMatchesByTeamName(name);
+        Team team = new Team(name, teamMatches);
+        return team.computeResult();
+    }
+
+    public List<Match> getTeamMatchesByName(String name) {
+        return matches.findMatchesByTeamName(name);
     }
 
     private List<String> findTeamNames(List<Match> matchesByGroup) {

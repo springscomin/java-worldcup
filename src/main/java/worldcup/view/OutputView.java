@@ -54,14 +54,32 @@ public class OutputView {
     public void printTeamResultsByGroup(String groupName, List<TeamResult> results) {
         System.out.println(groupName);
         IntStream.range(1, results.size())
-                .forEach(rank -> System.out.println(makeTeamResultDisplay(rank, results.get(rank - 1))));
+                .forEach(rank -> System.out.println(makeRankedTeamResultDisplay(rank, results.get(rank - 1))));
         System.out.println(DIVISION);
     }
 
-    private String makeTeamResultDisplay(int rank, TeamResult teamResult) {
+    private String makeRankedTeamResultDisplay(int rank, TeamResult teamResult) {
         StringBuilder builder = new StringBuilder();
         builder.append(rank).append("위 ").append(teamResult.getTeamName());
-        builder.append(" 승 : ").append(teamResult.getMatchResultCount().getWinCount());
+        builder.append(" ").append(makeTeamResultDisplay(teamResult));
+        return builder.toString();
+    }
+
+    public void printTeamMatchResults(TeamResult teamResult, List<Match> matches) {
+        printTeamResult(teamResult);
+        System.out.println();
+        matches.forEach(this::printMatch);
+        System.out.println(DIVISION);
+        System.out.println();
+    }
+
+    private void printTeamResult(TeamResult teamResult) {
+        System.out.println(makeTeamResultDisplay(teamResult));
+    }
+
+    private String makeTeamResultDisplay(TeamResult teamResult) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("승 : ").append(teamResult.getMatchResultCount().getWinCount());
         builder.append(" 무 : ").append(teamResult.getMatchResultCount().getDrawCount());
         builder.append(" 패 : ").append(teamResult.getMatchResultCount().getLoseCount());
         builder.append(RESULT_DELIMITER);
