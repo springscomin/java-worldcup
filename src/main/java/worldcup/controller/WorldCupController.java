@@ -18,10 +18,14 @@ public class WorldCupController {
         outputView.printMain();
         MenuCommand command = ExceptionHandler.retryForIllegalArgument(inputView::inputMenuCommand,
                 outputView::printErrorMessage);
-        // TODO 이 컨트롤러를 frontController로 만들고 별도 컨트롤러 정의해서 명령어 핸들러 클래스 분리
         if (command == MenuCommand.QUIT) {
             return;
         }
+        executeMenu(command);
+        run();
+    }
+
+    private void executeMenu(MenuCommand command) {
         if (command == MenuCommand.ALL) {
             showAllMatches();
         }
@@ -34,28 +38,27 @@ public class WorldCupController {
         if (command == MenuCommand.ADVANCE_TEAMS) {
             showAdvancedTeams();
         }
-        run();
     }
 
-    private void showAllMatches() {
+    public void showAllMatches() {
         Map<String, List<Match>> allMatches = worldCupService.getAllMatchesByGroup();
         outputView.printAllMatchesByGroup(allMatches);
     }
 
-    private void showGroupMatches() {
+    public void showGroupMatches() {
         String groupName = inputView.inputGroupName();
         List<TeamResult> results = worldCupService.getTeamResultsByGroup(groupName);
         outputView.printTeamResultsByGroup(groupName, results);
     }
 
-    private void showTeamMatchResults() {
+    public void showTeamMatchResults() {
         String teamName = inputView.inputTeamName();
         TeamResult teamResult = worldCupService.getTeamResultByName(teamName);
         List<Match> matches = worldCupService.getTeamMatchesByName(teamName);
         outputView.printTeamMatchResults(teamResult, matches);
     }
 
-    private void showAdvancedTeams() {
+    public void showAdvancedTeams() {
         Map<String, List<String>> advancedTeamsByGroup = worldCupService.getAdvancedTeamsByGroup();
         outputView.printAdvancedTeams(advancedTeamsByGroup);
     }
