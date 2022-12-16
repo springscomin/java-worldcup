@@ -11,6 +11,8 @@ public class Team {
         this.playedMatches = playedMatches;
     }
 
+    // TODO 경기 통계 생성
+
     @Override
     public String toString() {
         return "Team{" +

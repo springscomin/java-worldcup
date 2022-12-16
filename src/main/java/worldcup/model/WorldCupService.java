@@ -17,7 +17,7 @@ public class WorldCupService {
         return matches.allMatchesByGroup();
     }
 
-    public List<Team> getTeamsByGroup(String groupName) {
+    private List<Team> getTeamsByGroup(String groupName) {
         List<Match> matchesByGroup = matches.findMatchesByGroup(groupName);
         List<String> teamNames = findTeamNames(matchesByGroup);
         return teamNames.stream()

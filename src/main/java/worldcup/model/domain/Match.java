@@ -1,6 +1,8 @@
 package worldcup.model.domain;
 
 import java.util.Map;
+import java.util.Objects;
+import worldcup.view.constant.ErrorMessage;
 
 public class Match {
     private final String groupName;
@@ -23,9 +25,25 @@ public class Match {
         return scoreByTeam.containsKey(teamName);
     }
 
-    // TODO 기능: 참여한 팀 목록 확인
-    // TODO 기능: 특정 팀의 승/무/패 여부 확인
+    public Integer getSelfScore(String teamName) {
+        validateTeamName(teamName);
+        return scoreByTeam.get(teamName);
+    }
 
+    public Integer getCounterPartScore(String teamName) {
+        validateTeamName(teamName);
+        return scoreByTeam.keySet()
+                .stream().filter(name -> !Objects.equals(name, teamName))
+                .findFirst()
+                .map(scoreByTeam::get)
+                .orElse(null);
+    }
+
+    private void validateTeamName(String teamName) {
+        if (!scoreByTeam.containsKey(teamName)) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_TEAM_NAME_FOR_MATCH);
+        }
+    }
     // TODO 기능: 특정 팀의 승점/골득실/득점 확인
 
     @Override
