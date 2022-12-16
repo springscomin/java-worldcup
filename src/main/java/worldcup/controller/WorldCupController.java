@@ -11,5 +11,6 @@ public class WorldCupController {
 
     public void run() {
         outputView.printMain();
+        MenuCommand command = inputView.inputMenuCommand();
     }
 }
