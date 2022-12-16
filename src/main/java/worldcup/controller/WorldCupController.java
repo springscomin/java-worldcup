@@ -41,7 +41,7 @@ public class WorldCupController {
     }
 
     private void showGroupMatches() {
-
+        System.out.println(worldCupService.getTeamsByGroup("A조"));
     }
 
     private void showTeamMatchResults() {

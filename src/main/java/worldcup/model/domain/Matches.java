@@ -23,7 +23,7 @@ public class Matches {
         return new TreeMap<>(matchesByGroup);
     }
 
-    private List<Match> findMatchesByGroup(String groupName) {
+    public List<Match> findMatchesByGroup(String groupName) {
         List<Match> foundMatches = matches.stream()
                 .filter(match -> Objects.equals(groupName, match.getGroupName()))
                 .collect(Collectors.toList());

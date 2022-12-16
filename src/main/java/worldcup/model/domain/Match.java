@@ -19,6 +19,10 @@ public class Match {
         return scoreByTeam;
     }
 
+    public boolean isPlayedBy(String teamName) {
+        return scoreByTeam.containsKey(teamName);
+    }
+
     // TODO 기능: 참여한 팀 목록 확인
     // TODO 기능: 특정 팀의 승/무/패 여부 확인
 
