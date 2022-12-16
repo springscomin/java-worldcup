@@ -34,6 +34,18 @@ public class MatchResultCount {
         return (winCount * 3) + drawCount;
     }
 
+    public int getWinCount() {
+        return resultCount.get(MatchResult.WIN);
+    }
+
+    public int getLoseCount() {
+        return resultCount.get(MatchResult.LOSE);
+    }
+
+    public int getDrawCount() {
+        return resultCount.get(MatchResult.DRAW);
+    }
+
     @Override
     public String toString() {
         return "MatchResultCount{" +

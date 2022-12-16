@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import worldcup.model.WorldCupService;
 import worldcup.model.domain.Match;
+import worldcup.model.domain.TeamResult;
 import worldcup.view.InputView;
 import worldcup.view.OutputView;
 
@@ -42,7 +43,8 @@ public class WorldCupController {
 
     private void showGroupMatches() {
         String groupName = inputView.inputGroupName();
-        System.out.println(worldCupService.getGroupMatches(groupName));
+        List<TeamResult> results = worldCupService.getGroupMatches(groupName);
+        outputView.printTeamResultsByGroup(groupName, results);
     }
 
     private void showTeamMatchResults() {

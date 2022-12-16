@@ -4,12 +4,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.stream.IntStream;
 import worldcup.controller.MenuCommand;
 import worldcup.model.domain.Match;
+import worldcup.model.domain.TeamResult;
 import worldcup.view.constant.OutputFormat;
 
 public class OutputView {
     public static final String INFORM_START = "카타르 월드컵 조별리그 결과";
+    public static final String DIVISION = "============================================================";
+    public static final String RESULT_DELIMITER = ", ";
 
     public void printMain() {
         System.out.println(INFORM_START);
@@ -22,6 +26,7 @@ public class OutputView {
         System.out.println();
         allMatches.keySet()
                 .forEach(groupName -> printGroupMatches(groupName, allMatches.get(groupName)));
+        System.out.println(DIVISION);
     }
 
     private void printGroupMatches(String groupName, List<Match> matches) {
@@ -44,5 +49,25 @@ public class OutputView {
                 .stream().map(String::valueOf)
                 .forEach(scores::add);
         return teams + " " + scores;
+    }
+
+    public void printTeamResultsByGroup(String groupName, List<TeamResult> results) {
+        System.out.println(groupName);
+        IntStream.range(1, results.size())
+                .forEach(rank -> System.out.println(makeTeamResultDisplay(rank, results.get(rank - 1))));
+        System.out.println(DIVISION);
+    }
+
+    private String makeTeamResultDisplay(int rank, TeamResult teamResult) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(rank).append("위 ").append(teamResult.getTeamName());
+        builder.append(" 승 : ").append(teamResult.getMatchResultCount().getWinCount());
+        builder.append(" 무 : ").append(teamResult.getMatchResultCount().getDrawCount());
+        builder.append(" 패 : ").append(teamResult.getMatchResultCount().getLoseCount());
+        builder.append(RESULT_DELIMITER);
+        builder.append("승점 : ").append(teamResult.getScoreSummary().getRankPoint());
+        builder.append(" 득실차 : ").append(teamResult.getScoreSummary().computeTotalGoalDifference());
+        builder.append(" 득점 : ").append(teamResult.getScoreSummary().getTotalGoals());
+        return builder.toString();
     }
 }
