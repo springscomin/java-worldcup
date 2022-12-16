@@ -1,6 +1,7 @@
 package worldcup.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,13 @@ public class WorldCupService {
         return matches.allMatchesByGroup();
     }
 
-    public List<TeamResult> getTeamResultsByGroup(String groupName) {
+    public List<TeamResult> getGroupMatches(String groupName) {
+        List<TeamResult> teamResults = getTeamResultsByGroup(groupName);
+        Collections.reverse(teamResults);
+        return teamResults;
+    }
+
+    private List<TeamResult> getTeamResultsByGroup(String groupName) {
         return getTeamsByGroup(groupName)
                 .stream().map(Team::computeResult)
                 .collect(Collectors.toList());

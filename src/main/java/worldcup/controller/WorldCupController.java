@@ -41,7 +41,8 @@ public class WorldCupController {
     }
 
     private void showGroupMatches() {
-        System.out.println(worldCupService.getTeamResultsByGroup("A조"));
+        // TODO 조 이름 입력받기
+        System.out.println(worldCupService.getGroupMatches("H조"));
     }
 
     private void showTeamMatchResults() {
