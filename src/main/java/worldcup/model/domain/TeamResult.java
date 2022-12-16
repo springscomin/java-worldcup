@@ -1,6 +1,6 @@
 package worldcup.model.domain;
 
-public class TeamResult implements Comparable<ScoreSummary> {
+public class TeamResult implements Comparable<TeamResult> {
     private final String teamName;
     private final MatchResultCount matchResultCount;
     private final ScoreSummary scoreSummary;
@@ -33,13 +33,7 @@ public class TeamResult implements Comparable<ScoreSummary> {
     }
 
     @Override
-    public int compareTo(ScoreSummary other) {
-        if (scoreSummary.getRankPoint() > other.getRankPoint()) {
-            return 1;
-        }
-        if (scoreSummary.getRankPoint() < other.getRankPoint()) {
-            return -1;
-        }
-        return Integer.compare(scoreSummary.computeTotalGoalDifference(), other.computeTotalGoalDifference());
+    public int compareTo(TeamResult other) {
+        return scoreSummary.compareTo(other.scoreSummary);
     }
 }

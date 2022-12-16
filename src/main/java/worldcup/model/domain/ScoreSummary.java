@@ -1,6 +1,6 @@
 package worldcup.model.domain;
 
-public class ScoreSummary {
+public class ScoreSummary implements Comparable<ScoreSummary> {
     private final int rankPoint;
     private final int totalLosingGoals;
     private final int totalGoals;
@@ -30,5 +30,23 @@ public class ScoreSummary {
                 ", totalLosingGoals=" + totalLosingGoals +
                 ", totalGoals=" + totalGoals +
                 '}';
+    }
+
+    @Override
+    public int compareTo(ScoreSummary other) {
+        if (rankPoint > other.rankPoint) {
+            return 1;
+        }
+        if (rankPoint < other.rankPoint) {
+            return -1;
+        }
+        return compareIfSameRank(other);
+    }
+
+    private int compareIfSameRank(ScoreSummary other) {
+        if (computeTotalGoalDifference() == other.computeTotalGoalDifference()) {
+            return totalGoals - other.totalGoals;
+        }
+        return computeTotalGoalDifference() - other.computeTotalGoalDifference();
     }
 }

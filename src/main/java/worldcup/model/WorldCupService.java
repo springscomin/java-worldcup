@@ -1,7 +1,6 @@
 package worldcup.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,6 @@ public class WorldCupService {
 
     public List<TeamResult> getGroupMatches(String groupName) {
         List<TeamResult> teamResults = getTeamResultsByGroup(groupName);
-        Collections.reverse(teamResults);
         return teamResults;
     }
 
