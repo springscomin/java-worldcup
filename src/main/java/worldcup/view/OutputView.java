@@ -14,6 +14,7 @@ public class OutputView {
     public static final String INFORM_START = "카타르 월드컵 조별리그 결과";
     public static final String DIVISION = "============================================================";
     public static final String RESULT_DELIMITER = ", ";
+    public static final String ERROR_PREFIX = "[ERROR] ";
 
     public void printMain() {
         System.out.println(INFORM_START);
@@ -101,5 +102,9 @@ public class OutputView {
                 .mapToObj(rank -> rank + "위 " + teamNames.get(rank - 1))
                 .forEach(System.out::println);
         System.out.println();
+    }
+
+    public void printErrorMessage(String errorMessage) {
+        System.out.println(ERROR_PREFIX + errorMessage);
     }
 }

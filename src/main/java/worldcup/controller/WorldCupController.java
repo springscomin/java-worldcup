@@ -2,6 +2,7 @@ package worldcup.controller;
 
 import java.util.List;
 import java.util.Map;
+import worldcup.controller.util.ExceptionHandler;
 import worldcup.model.WorldCupService;
 import worldcup.model.domain.Match;
 import worldcup.model.domain.TeamResult;
@@ -14,9 +15,9 @@ public class WorldCupController {
     private final WorldCupService worldCupService = new WorldCupService();
 
     public void run() {
-        // TODO 입력값 예외 발생 시 해당 기능 재실행
         outputView.printMain();
-        MenuCommand command = inputView.inputMenuCommand();
+        MenuCommand command = ExceptionHandler.retryForIllegalArgument(inputView::inputMenuCommand,
+                outputView::printErrorMessage);
         // TODO 이 컨트롤러를 frontController로 만들고 별도 컨트롤러 정의해서 명령어 핸들러 클래스 분리
         if (command == MenuCommand.QUIT) {
             return;
@@ -25,10 +26,10 @@ public class WorldCupController {
             showAllMatches();
         }
         if (command == MenuCommand.GROUP) {
-            showGroupMatches();
+            ExceptionHandler.retryForIllegalArgument(this::showGroupMatches, outputView::printErrorMessage);
         }
         if (command == MenuCommand.TEAM) {
-            showTeamMatchResults();
+            ExceptionHandler.retryForIllegalArgument(this::showTeamMatchResults, outputView::printErrorMessage);
         }
         if (command == MenuCommand.ADVANCE_TEAMS) {
             showAdvancedTeams();
