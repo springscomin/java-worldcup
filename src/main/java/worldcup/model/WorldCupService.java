@@ -9,12 +9,19 @@ import java.util.stream.Collectors;
 import worldcup.model.domain.Match;
 import worldcup.model.domain.Matches;
 import worldcup.model.domain.Team;
+import worldcup.model.domain.TeamResult;
 
 public class WorldCupService {
     private final Matches matches = new Matches();
 
     public Map<String, List<Match>> getAllMatchesByGroup() {
         return matches.allMatchesByGroup();
+    }
+
+    public List<TeamResult> getTeamResultsByGroup(String groupName) {
+        return getTeamsByGroup(groupName)
+                .stream().map(Team::computeResult)
+                .collect(Collectors.toList());
     }
 
     private List<Team> getTeamsByGroup(String groupName) {

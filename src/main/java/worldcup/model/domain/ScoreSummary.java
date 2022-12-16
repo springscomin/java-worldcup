@@ -22,4 +22,13 @@ public class ScoreSummary {
     public int computeTotalGoalDifference() {
         return totalGoals - totalLosingGoals;
     }
+
+    @Override
+    public String toString() {
+        return "ScoreSummary{" +
+                "rankPoint=" + rankPoint +
+                ", totalLosingGoals=" + totalLosingGoals +
+                ", totalGoals=" + totalGoals +
+                '}';
+    }
 }

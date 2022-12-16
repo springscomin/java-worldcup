@@ -1,12 +1,34 @@
 package worldcup.model.domain;
 
 public class TeamResult {
+    private final String teamName;
     private final MatchResultCount matchResultCount;
     private final ScoreSummary scoreSummary;
 
-    public TeamResult(MatchResultCount matchResultCount, int totalLosingGoals, int totalGoals) {
+    public TeamResult(String teamName, MatchResultCount matchResultCount, ScoreSummary scoreSummary) {
+        this.teamName = teamName;
         this.matchResultCount = matchResultCount;
-        int rankPoint = matchResultCount.computeRankPoint();
-        this.scoreSummary = new ScoreSummary(rankPoint, totalLosingGoals, totalGoals);
+        this.scoreSummary = scoreSummary;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public MatchResultCount getMatchResultCount() {
+        return matchResultCount;
+    }
+
+    public ScoreSummary getScoreSummary() {
+        return scoreSummary;
+    }
+
+    @Override
+    public String toString() {
+        return "TeamResult{" +
+                "teamName='" + teamName + '\'' +
+                ", matchResultCount=" + matchResultCount +
+                ", scoreSummary=" + scoreSummary +
+                '}';
     }
 }

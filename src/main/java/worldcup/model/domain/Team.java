@@ -1,32 +1,41 @@
 package worldcup.model.domain;
 
-import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
+import worldcup.view.constant.ErrorMessage;
 
 public class Team {
     private final String name;
     private final List<Match> playedMatches;
 
     public Team(String name, List<Match> playedMatches) {
+        validateMatches(playedMatches);
         this.name = name;
         this.playedMatches = playedMatches;
     }
 
-//    public TeamResult computeResult() {
-//        return new TeamResult(computeResultCount());
-//    }
-
-    private MatchResultCount computeResultCount() {
-        Map<MatchResult, Integer> resultCount = new EnumMap<>(MatchResult.class);
-        playedMatches.stream()
-                .map(this::computeMatchResult)
-                .forEach(result -> resultCount.put(result, resultCount.getOrDefault(result, 0) + 1));
-        return new MatchResultCount(resultCount);
+    private void validateMatches(List<Match> playedMatches) {
+        if (playedMatches.isEmpty()) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_MATCHES_SIZE);
+        }
     }
 
-    private MatchResult computeMatchResult(Match match) {
-        return MatchResult.computeResult(match.getSelfScore(name), match.getCounterPartScore(name));
+    public TeamResult computeResult() {
+        MatchResultCount matchResultCount = new MatchResultCount(name, playedMatches);
+        ScoreSummary scoreSummary = new ScoreSummary(matchResultCount.computeRankPoint(), sumTotalGoals(),
+                sumTotalLosingGoals());
+        return new TeamResult(name, matchResultCount, scoreSummary);
+    }
+
+    private int sumTotalGoals() {
+        return playedMatches.stream()
+                .map(match -> match.getSelfScore(name))
+                .reduce(0, Integer::sum);
+    }
+
+    private int sumTotalLosingGoals() {
+        return playedMatches.stream()
+                .map(match -> match.getCounterPartScore(name))
+                .reduce(0, Integer::sum);
     }
 
     @Override
