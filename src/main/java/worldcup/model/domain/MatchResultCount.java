@@ -18,6 +18,12 @@ public class MatchResultCount {
                 .forEach(result -> this.resultCount.put(result, 0));
     }
 
+    public int computeRankPoint() {
+        int winCount = resultCount.get(MatchResult.WIN);
+        int drawCount = resultCount.get(MatchResult.DRAW);
+        return (winCount * 3) + drawCount;
+    }
+
     @Override
     public String toString() {
         return "MatchResultCount{" +

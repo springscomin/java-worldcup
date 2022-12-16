@@ -13,6 +13,10 @@ public class Team {
         this.playedMatches = playedMatches;
     }
 
+//    public TeamResult computeResult() {
+//        return new TeamResult(computeResultCount());
+//    }
+
     private MatchResultCount computeResultCount() {
         Map<MatchResult, Integer> resultCount = new EnumMap<>(MatchResult.class);
         playedMatches.stream()
@@ -24,8 +28,6 @@ public class Team {
     private MatchResult computeMatchResult(Match match) {
         return MatchResult.computeResult(match.getSelfScore(name), match.getCounterPartScore(name));
     }
-
-    // TODO 경기 통계 생성
 
     @Override
     public String toString() {
