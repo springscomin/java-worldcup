@@ -43,7 +43,7 @@ public class WorldCupController {
 
     private void showGroupMatches() {
         String groupName = inputView.inputGroupName();
-        List<TeamResult> results = worldCupService.getGroupMatches(groupName);
+        List<TeamResult> results = worldCupService.getTeamResultsByGroup(groupName);
         outputView.printTeamResultsByGroup(groupName, results);
     }
 

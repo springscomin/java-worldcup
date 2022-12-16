@@ -1,8 +1,11 @@
 package worldcup.model.domain;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import worldcup.model.MatchResultReader;
@@ -31,17 +34,25 @@ public class Matches {
         return foundMatches;
     }
 
-    private void validateFoundMatches(List<Match> matches) {
-        if (matches.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.GROUP_MATCHES_NOT_FOUND);
-        }
-    }
-
     public List<Match> findMatchesByTeamName(String teamName) {
         List<Match> foundMatches = matches.stream()
                 .filter(match -> match.isPlayedBy(teamName))
                 .collect(Collectors.toList());
         validateFoundMatches(foundMatches);
         return foundMatches;
+    }
+
+    public List<String> findTeamNamesByGroup(String groupName) {
+        Set<String> distinctTeams = new HashSet<>();
+        findMatchesByGroup(groupName).stream()
+                .map(match -> match.getScoreByTeam().keySet())
+                .forEach(distinctTeams::addAll);
+        return new ArrayList<>(distinctTeams);
+    }
+
+    private void validateFoundMatches(List<Match> matches) {
+        if (matches.isEmpty()) {
+            throw new IllegalArgumentException(ErrorMessage.GROUP_MATCHES_NOT_FOUND);
+        }
     }
 }
