@@ -7,11 +7,12 @@ import java.util.StringJoiner;
 import worldcup.controller.MenuCommand;
 import worldcup.model.domain.Match;
 import worldcup.view.constant.OutputFormat;
-import worldcup.view.constant.OutputMessage;
 
 public class OutputView {
+    public static final String INFORM_START = "카타르 월드컵 조별리그 결과";
+
     public void printMain() {
-        System.out.println(OutputMessage.INFORM_START);
+        System.out.println(INFORM_START);
         System.out.println();
         Arrays.stream(MenuCommand.values())
                 .forEach(command -> System.out.printf(OutputFormat.MAIN_COMMAND, command.getKey(), command.getValue()));
