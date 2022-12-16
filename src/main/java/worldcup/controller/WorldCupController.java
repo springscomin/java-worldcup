@@ -37,7 +37,7 @@ public class WorldCupController {
 
     private void showAllMatches() {
         Map<String, List<Match>> allMatches = worldCupService.getAllMatchesByGroup();
-//        outputView.printAllMatchesByGroup(allMatches);
+        outputView.printAllMatchesByGroup(allMatches);
     }
 
     private void showGroupMatches() {
