@@ -1,8 +1,11 @@
 package worldcup.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import worldcup.model.domain.Match;
 import worldcup.model.domain.Matches;
 import worldcup.model.domain.Team;
@@ -36,5 +39,24 @@ public class WorldCupService {
         return teamNames.stream()
                 .map(name -> new Team(name, matches.findMatchesByTeamName(name)))
                 .collect(Collectors.toList());
+    }
+
+    public Map<String, List<String>> getAdvancedTeamsByGroup() {
+        List<String> groupNames = matches.getAllGroupNames();
+        Map<String, List<String>> advancedTeams = groupNames.stream()
+                .collect(Collectors.toMap(groupName -> groupName, this::getAdvancedTeamsByGroup));
+        return new TreeMap<>(advancedTeams);
+    }
+
+    private List<String> getAdvancedTeamsByGroup(String groupName) {
+        return getAdvancedTeams(getTeamResultsByGroup(groupName));
+    }
+
+    private List<String> getAdvancedTeams(List<TeamResult> teamResults) {
+        List<String> advancedTeamNames = new ArrayList<>();
+        IntStream.range(0, 2)
+                .mapToObj(teamResults::get)
+                .forEach(team -> advancedTeamNames.add(team.getTeamName()));
+        return advancedTeamNames;
     }
 }

@@ -55,4 +55,11 @@ public class Matches {
             throw new IllegalArgumentException(ErrorMessage.GROUP_MATCHES_NOT_FOUND);
         }
     }
+
+    public List<String> getAllGroupNames() {
+        return matches.stream()
+                .map(Match::getGroupName)
+                .distinct()
+                .collect(Collectors.toList());
+    }
 }

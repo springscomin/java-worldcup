@@ -53,7 +53,7 @@ public class OutputView {
 
     public void printTeamResultsByGroup(String groupName, List<TeamResult> results) {
         System.out.println(groupName);
-        IntStream.range(1, results.size())
+        IntStream.range(1, results.size() + 1)
                 .forEach(rank -> System.out.println(makeRankedTeamResultDisplay(rank, results.get(rank - 1))));
         System.out.println(DIVISION);
     }
