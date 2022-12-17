@@ -1,7 +1,10 @@
 package worldcup;
 
+import worldcup.controller.WorldCupController;
+
 public class Application {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        WorldCupController worldCupController = new WorldCupController();
+        worldCupController.run();
     }
 }
